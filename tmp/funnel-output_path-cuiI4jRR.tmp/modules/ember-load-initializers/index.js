@@ -1,0 +1,1 @@
+/Users/avni/Desktop/SC2/Modern_Web/ember/finalproject/tmp/funnel-input_base_path-BL8H3cSh.tmp/0/index.js

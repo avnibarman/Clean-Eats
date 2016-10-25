@@ -1,0 +1,1 @@
+/Users/avni/Desktop/SC2/Modern_Web/ember/finalproject/tmp/funnel-input_base_path-wCSqHX4q.tmp/0/utils/module-registry.js
