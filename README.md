@@ -1,7 +1,6 @@
 # Finalproject
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+My web application will be able to search through all products at a user-specified grocery store and pick the best brand/product of the item the shopper is looking for to suit individual user-specified health preferences (i.e. high protein diets, low carb diets, diabetes, etc.). This will use an API of the nutrition facts of grocery products at each grocery store to compare fat/protein ratios, sugar amounts, sodium levels, etc.
 
 ## Prerequisites
 
