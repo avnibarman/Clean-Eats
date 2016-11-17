@@ -1,7 +1,13 @@
 
 <h1>Search</h1>
 
-<input type="text">
-<input type="submit" value="Submit">
+<form>
+
+<!-- {{input type="text" value=foodItem}}
+{{input type="submit" action="search"}} -->
+<input type="text" {{value "item"}}/>
+<input type="submit" {{action "search"}}/>
+
+</form>
 
 {{outlet}}
