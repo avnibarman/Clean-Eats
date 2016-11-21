@@ -2,12 +2,28 @@
 <h1>Search</h1>
 
 <form>
-
-<!-- {{input type="text" value=foodItem}}
-{{input type="submit" action="search"}} -->
-<input type="text" {{value "item"}}/>
+What do you want to eat? &nbsp;
+{{input type="text" value=foodItem}}
+<br><br>
+<!-- Diet Preferences?<br>
+<input type="radio" name="diet" value="sugar">Low Sugar<br>
+<input type="radio" name="diet" value="carb">Low Carb<br>
+<input type="radio" name="diet" value="fat">Low Fat<br>
+<input type="radio" name="diet" value="protein">High protein<br>
+<input type="radio" name="diet" value="sodium">Low Sodium<br> -->
+<br>
 <input type="submit" {{action "search"}}/>
 
 </form>
+
+
+{{#each model.data as |item|}}
+
+<div>
+  <h4>{{item.hits.fields.item_type}}</h4>
+</div>
+{{else}}
+  <p>No results</p>
+{{/each}}
 
 {{outlet}}
