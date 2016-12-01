@@ -3,53 +3,107 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   actions: {
-    search() {
-      //e.preventDefault();
+    selectPreference(preference) {
+      // console.log(preference);
+      this.set('preference', preference);
+    },
 
-      var url = 'https://api.nutritionix.com/v1_1/search';
-      var data = {
-                  "appId":"74327998",
-                  "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
-                  "query": this.get("foodItem"),
-                  "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty","nf_serving_size_unit"],
-                  "offset": 0,
-                  "limit":50,
-                  "sort":{
-                    "field":"_score",
-                    "order":"desc"
-                  },
-                  "filters":{
-                    "item_type":2
-                  }
-               };
+  search() {
+    var pref = this.get('preference');
+    var url = 'https://api.nutritionix.com/v1_1/search';
+    var data = {};
 
-         var promise = $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            success: function(data) {
-               //console.log(JSON.stringify(data));
-
-               return data;
-            },
-            dataType: 'json'
-          });
-
-promise.then((response) => {
-
-  console.log(response);
-  this.set('foodItem', null);
-
-  var items = this.get('model.data');
-
-  var newItems = items.concat(response);
-  this.set('model.data', newItems);
-
-}, function() {
-  alert('error');
-});
-
-
-      }
+    if(pref == "lowcarb"){
+      data = {
+        "appId":"74327998",
+        "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
+        "query": this.get("foodItem"),
+        "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty", "item_description", "nf_total_carbohydrate", "nf_sugars", "images_front_full_url"],
+        "offset": 0,
+        "limit":50,
+        "sort":{
+          "field":"nf_total_carbohydrate",
+          "order":"asc"
+        },
+        "filters":{
+          // "nf_total_carbohydrate":{
+          //   "lte": 15
+          // },
+          "item_type":2
+        }
+      };
     }
+    else if (pref == "lowsugar"){
+
+      data = {
+        "appId":"74327998",
+        "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
+        "query": this.get("foodItem"),
+        "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty","nf_total_carbohydrate", "nf_sugars"],
+        "offset": 0,
+        "limit":50,
+        "sort":{
+          "field":"nf_sugars",
+          "order":"asc"
+        },
+        "filters":{
+          // "nf_calories":{
+          //   "lte": 200
+          // },
+          // "nf_total_fat":{
+          //   "lte": 10
+          // },
+          // "nf_sugars":{
+          //   "lte": 5
+          // },
+          // "nf_total_carbohydrate":{
+          //   "lte": 15
+          // },
+          "item_type":2
+        }
+      };
+    }
+    else{
+      data = {
+        "appId":"74327998",
+        "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
+        "query": this.get("foodItem"),
+        "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty","nf_total_carbohydrate", "nf_sugars"],
+        "offset": 0,
+        "limit":50,
+        "sort":{
+          "field":"nf_protein",
+          "order":"desc"
+        },
+        "filters":{
+          // "nf_calories":{
+          //   "lte": 200
+          // },
+          // "nf_total_fat":{
+          //   "lte": 10
+          // },
+          // "nf_sugars":{
+          //   "lte": 5
+          // },
+          // "nf_total_carbohydrate":{
+          //   "lte": 15
+          // },
+          "item_type":2
+        }
+      };
+    }
+
+    var controller = this;
+    var promise = $.ajax({
+      url: url,
+      type: "POST",
+      data: data,
+      success: function(data) {
+        console.log(data);
+        controller.set('response', data);
+      },
+      dataType: 'json'
+    });
+  }
+  }
 });
