@@ -1,45 +1,37 @@
 <div style="padding-top: 70px;">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                {{ link-to 'Clean Eats' 'search' class="navbar-brand" }}
-                <!-- <a class="navbar-brand" href="#">Clean Eats</a> -->
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li>{{ link-to 'About' 'about' }}</li>
-                  <li>{{ link-to 'Contact' 'contact' }}</li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        {{ link-to 'Clean Eats' 'search' class="navbar-brand" }}
+        <!-- <a class="navbar-brand" href="#">Clean Eats</a> -->
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>{{ link-to 'Your Grocery List' 'list' }}</li>
+          <li>{{ link-to 'About' 'about' }}</li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+  </nav>
 <div class="container">
-    <h1>About</h1>
-<p>Ember basic components</p>
-<ul class="list-group">
-  <li class="list-group-item">Route</li>
-  <li class="list-group-item">Model</li>
-  <li class="list-group-item">View</li>
-  <li class="list-group-item">Template</li>
-  <li class="list-group-item">Controller?</li>
-</ul>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Ember 2.0 is comming</h3>
+    <h3>About</h3>
   </div>
   <div class="panel-body">
-    <p>The next version of ember will continue
-    to improve the way we create web applications</p>
+    <p>Clean Eats helps you find the best grocery products for your individual health preferences
+      (i.e. weight loss diets, high blood pressure, diabetes, etc.). This web app uses nutrition labels of grocery products from the Nutrionix API to suggest the best possible products.
+      The user can also make personalized grocery lists from the results.</p>
   </div>
 </div>
 
