@@ -18,11 +18,51 @@ export default Ember.Controller.extend({
         "appId":"74327998",
         "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
         "query": this.get("foodItem"),
-        "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty", "item_description", "nf_total_carbohydrate", "nf_sugars", "images_front_full_url"],
+        "fields":["item_name","brand_name","nf_serving_size_qty", "nf_calories", "nf_calories_from_fat", "nf_sugars", "nf_sodium", "nf_ingredient_statement","nf_total_carbohydrate", "nf_protein", "images_front_full_url"],
         "offset": 0,
         "limit":50,
         "sort":{
           "field":"nf_total_carbohydrate",
+          "order":"asc"
+        },
+        "filters":{
+          // "nf_total_carbohydrate":{
+          //   "lte": 15
+          // },
+          "item_type":2
+        }
+      };
+    }
+    else if(pref == "highcarb"){
+      data = {
+        "appId":"74327998",
+        "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
+        "query": this.get("foodItem"),
+        "fields":["item_name","brand_name","nf_serving_size_qty", "nf_calories", "nf_calories_from_fat", "nf_sugars", "nf_sodium", "nf_ingredient_statement","nf_total_carbohydrate", "nf_protein"],
+        "offset": 0,
+        "limit":50,
+        "sort":{
+          "field":"nf_total_carbohydrate",
+          "order":"desc"
+        },
+        "filters":{
+          // "nf_total_carbohydrate":{
+          //   "lte": 15
+          // },
+          "item_type":2
+        }
+      };
+    }
+    else if(pref == "lowcalorie"){
+      data = {
+        "appId":"74327998",
+        "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
+        "query": this.get("foodItem"),
+        "fields":["item_name","brand_name","nf_calories", "nf_calories_from_fat", "nf_sugars", "nf_sodium", "nf_serving_size_qty", "nf_ingredient_statement", "nf_total_carbohydrate", "nf_protein"],
+        "offset": 0,
+        "limit":50,
+        "sort":{
+          "field":"nf_calories",
           "order":"asc"
         },
         "filters":{
@@ -39,7 +79,7 @@ export default Ember.Controller.extend({
         "appId":"74327998",
         "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
         "query": this.get("foodItem"),
-        "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty","nf_total_carbohydrate", "nf_sugars"],
+        "fields":["item_name","brand_name","nf_ingredient_statement","nf_serving_size_qty", "nf_sugars", "nf_sodium", "nf_calories", "nf_calories_from_fat", "nf_total_carbohydrate", "nf_protein"],
         "offset": 0,
         "limit":50,
         "sort":{
@@ -63,12 +103,32 @@ export default Ember.Controller.extend({
         }
       };
     }
-    else{
+    else if(pref == "lowsodium"){
       data = {
         "appId":"74327998",
         "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
         "query": this.get("foodItem"),
-        "fields":["item_name","brand_name","nf_calories","nf_serving_size_qty","nf_total_carbohydrate", "nf_sugars"],
+        "fields":["item_name","brand_name","nf_ingredient_statement", "nf_calories", "nf_calories_from_fat", "nf_serving_size_qty", "nf_sugars", "nf_sodium", "nf_total_carbohydrate", "nf_protein"],
+        "offset": 0,
+        "limit":50,
+        "sort":{
+          "field":"nf_sodium",
+          "order":"asc"
+        },
+        "filters":{
+          // "nf_total_carbohydrate":{
+          //   "lte": 15
+          // },
+          "item_type":2
+        }
+      };
+    }
+    else if (pref == "highprotein"){
+      data = {
+        "appId":"74327998",
+        "appKey":"674d7a56170dd05aeba19fcaa0f672a3",
+        "query": this.get("foodItem"),
+        "fields":["item_name","brand_name","nf_calories", "nf_ingredient_statement", "nf_calories_from_fat","nf_serving_size_qty","nf_total_carbohydrate", "nf_sugars", "nf_protein", "nf_sodium"],
         "offset": 0,
         "limit":50,
         "sort":{
@@ -94,6 +154,7 @@ export default Ember.Controller.extend({
     }
 
     var controller = this;
+
     var promise = $.ajax({
       url: url,
       type: "POST",

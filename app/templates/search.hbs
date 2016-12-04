@@ -1,3 +1,4 @@
+<div style="padding-top: 70px;">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,20 +9,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                {{ link-to 'Search for Clean Eats' 'search' class="navbar-brand" }}
+                <!-- <a class="navbar-brand" href="#">Clean Eats</a> -->
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+                  <li>{{ link-to 'About' 'about' }}</li>
+                  <li>{{ link-to 'Contact' 'contact' }}</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -29,31 +24,43 @@
         <!-- /.container -->
     </nav>
 
-<h1>Search</h1>
-<form>
-What do you want to eat? (i.e. fish, candy, oatmeal)&nbsp;
-{{input type="text" value=foodItem}}
-<br><br>
-Diet Preferences?<br>
-<input type="radio" name="diet" value="lowcarb" onclick={{action "selectPreference" "lowcarb"}}>Low Carb<br>
-<input type="radio" name="diet" value="highprotein" onclick={{action "selectPreference" "highprotein"}}>High Protein<br>
-<input type="radio" name="diet" value="lowsugar" onclick={{action "selectPreference" "lowsugar"}}>Low Sugar<br>
-<br>
-<input type="submit" {{action "search"}}/>
-<br>
-</form>
+    <!-- Page Content -->
+    <div class="container">
+      <form>
+      <h1>What do you want to eat?</h1> <h4>(i.e. fish, candy, oatmeal)</h4>
+      {{input type="text" value=foodItem class="searchbar"}}
 
-{{#each response.hits as |item|}}
+      <br>
+      <h2>Diet Preferences?</h2>
 
-<br><br>
-<div>
-  <b>{{item.fields.brand_name}}</b> - {{item.fields.item_name}}<br>
-  <!-- Calories: {{item.fields.nf_calories}} <br>
-  Calories from Fat: {{item.fields.nf_calories_from_fat}} <br> -->
-  <br>
-</div>
-{{else}}
-  <p>Showing 0 results...</p>
-{{/each}}
+      <h4><input type="radio" name="diet" value="lowcarb" onclick={{action "selectPreference" "lowcarb"}}>&nbsp;&nbsp;Low Carb</h4>
+      <h4><input type="radio" name="diet" value="highcarb" onclick={{action "selectPreference" "highcarb"}}>&nbsp;&nbsp;High Carb</h4>
+      <h4><input type="radio" name="diet" value="highprotein" onclick={{action "selectPreference" "highprotein"}}>&nbsp;&nbsp;High Protein</h4>
+      <h4><input type="radio" name="diet" value="lowcalorie" onclick={{action "selectPreference" "lowcalorie"}}>&nbsp;&nbsp;Low Calorie</h4>
+      <h4><input type="radio" name="diet" value="lowsugar" onclick={{action "selectPreference" "lowsugar"}}>&nbsp;&nbsp;Low Sugar</h4>
+      <h4><input type="radio" name="diet" value="lowsodium" onclick={{action "selectPreference" "lowsodium"}}>&nbsp;&nbsp;Low Sodium</h4>
+      <br>
+      <input type="submit" class="btn btn-success" {{action "search"}}/>
+      <br>
 
-{{outlet}}
+
+      </form>
+      <br>
+
+      {{#each response.hits as |item|}}
+      <br><br>
+      <div style="background-color: #e3e3e3; padding: 2.5%; border: 2px solid #419641;">
+        <h3><b>{{item.fields.item_name}}</b>, <em>{{item.fields.brand_name}}</em></h3>
+        <h5>Ingredients: {{item.fields.nf_ingredient_statement}}</h5> <br>
+        <b>Calories:</b> <span style="color: #419641;">{{item.fields.nf_calories}}</span> <br>
+        <b>Calories from Fat:</b> <span style="color: #419641;">{{item.fields.nf_calories_from_fat}}</span> <br>
+        <b>Total Carbohydrates:</b> <span style="color: #419641;">{{item.fields.nf_total_carbohydrate}}</span> <br>
+        <b>Protein:</b> <span style="color: #419641;">{{item.fields.nf_protein}}</span><br>
+        <b>Sugars:</b> <span style="color: #419641;">{{item.fields.nf_sugars}}</span><br>
+        <b>Sodium:</b> <span style="color: #419641;">{{item.fields.nf_sodium}}</span>
+      </div>
+
+      {{/each}}
+
+    </div>
+  </div>
