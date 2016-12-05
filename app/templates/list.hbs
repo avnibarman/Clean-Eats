@@ -5,17 +5,17 @@
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
+          <span class="icon-bar">{{ link-to 'Clean Eats' 'search' class="navbar-brand" }}</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        {{ link-to 'Search for Clean Eats' 'search' class="navbar-brand" }}
+        {{ link-to 'Clean Eats' 'search' class="navbar-brand" }}
         <!-- <a class="navbar-brand" href="#">Clean Eats</a> -->
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li>{{ link-to 'Personalized Grocery List' 'list' }}</li>
+          <li>{{ link-to 'Your Grocery List' 'list' }}</li>
           <li>{{ link-to 'About' 'about' }}</li>
         </ul>
       </div>
@@ -25,16 +25,18 @@
   </nav>
       <div style="width: 60%; margin: auto;">
         <div style="float: left;"><h4>My Grocery List</h4></div>
-        <div style="float: right;"><button style="margin-top: 10px;" {{action "delete"}}>Clear List</button></div>
+        <div style="float: right;"><button class="but" style="margin-top: 10px;" {{action "delete" preventDefault=false}}>Clear List</button></div>
       </div>
       <br>
       <br>
       <br>
+  <div style="background-color: #e3e3e3; width: 60%; margin: auto; border: 3px solid #419641;">
 {{#each model.data as |item|}}
-  <div style="background-color: #e3e3e3; width: 60%; margin: auto; padding: 1%; border: 2px solid #419641;">
+  <div class="listresult" style="background-color: #e3e3e3; width: 100%; margin: auto; padding: 1%; border: 1px solid #419641;">
   <h6><b>{{item.item}}</b></h6>
   </div>
 {{/each}}
+</div>
 
 {{outlet}}
 

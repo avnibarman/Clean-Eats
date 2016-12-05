@@ -34,11 +34,11 @@
 <!-- Page Content -->
 <div class="container">
   <form>
-    <h1>What do you want to eat?</h1> <h4>(i.e. fish, candy, oatmeal)</h4>
+    <h1>What groceries would you like to purchase?</h1> <h4>(i.e. fish, candy, oatmeal)</h4>
     {{input type="text" value=foodItem class="searchbar"}}
 
     <br>
-    <h2>Diet Preferences?</h2>
+    <h2>Diet Preferences*</h2>
 
     <h4><input type="radio" name="diet" value="lowcarb" onclick={{action "selectPreference" "lowcarb"}}>&nbsp;&nbsp;Low Carb</h4>
     <h4><input type="radio" name="diet" value="highcarb" onclick={{action "selectPreference" "highcarb"}}>&nbsp;&nbsp;High Carb</h4>
@@ -47,7 +47,7 @@
     <h4><input type="radio" name="diet" value="lowsugar" onclick={{action "selectPreference" "lowsugar"}}>&nbsp;&nbsp;Low Sugar</h4>
     <h4><input type="radio" name="diet" value="lowsodium" onclick={{action "selectPreference" "lowsodium"}}>&nbsp;&nbsp;Low Sodium</h4>
     <br>
-    <input type="submit" class="btn btn-success" {{action "search"}}/>
+    <input type="submit" class="submitbutton btn btn-success" {{action "search"}}/>
     <br>
 
 
@@ -56,20 +56,21 @@
 
   {{#each response.hits as |item|}}
   <br><br>
-  <div style="background-color: #e3e3e3; padding: 2.5%; border: 2px solid #419641;">
+  <div class="result" style="background-color: #e3e3e3; padding: 2.5%; border: 2px solid #419641;">
     <h3><b>{{item.fields.item_name}}</b>, <em>{{item.fields.brand_name}}</em></h3>
     <h5>Ingredients: {{item.fields.nf_ingredient_statement}}</h5> <br>
-    <b>Calories:</b> <span style="color: #419641;">{{item.fields.nf_calories}}</span> <br>
+    <b>Calories:</b> <span style="color: #419641;" >{{item.fields.nf_calories}}</span> <br>
     <b>Calories from Fat:</b> <span style="color: #419641;">{{item.fields.nf_calories_from_fat}}</span> <br>
     <b>Total Carbohydrates:</b> <span style="color: #419641;">{{item.fields.nf_total_carbohydrate}}</span> <br>
     <b>Protein:</b> <span style="color: #419641;">{{item.fields.nf_protein}}</span><br>
     <b>Sugars:</b> <span style="color: #419641;">{{item.fields.nf_sugars}}</span><br>
-    <b>Sodium:</b> <span style="color: #419641;">{{item.fields.nf_sodium}}</span>
+    <b>Sodium:</b> <span style="color: #419641;" >{{item.fields.nf_sodium}}</span>
     <br><br>
     <form>
-      <!-- {{input type="text" value=listItem}} -->
-      <input type="text" id="listItem" value={{item.fields.item_name}}>
-      <input type="submit" value="Add to Grocery List!" {{action "postList"}}/>
+
+      {{input type="hidden" value=item.fields.item_name}}
+      <input type="submit" class="submitbutton" value="Add to Grocery List" {{action "postList" item.fields.item_name}}/>
+
     </form>
     </div>
 

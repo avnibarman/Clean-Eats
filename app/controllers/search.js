@@ -1,22 +1,25 @@
 import Ember from 'ember';
 
+var $ = Ember.$;
+
 export default Ember.Controller.extend({
 
   actions: {
-    postList() {
+    postList(itemName) {
+   //console.log(itemName);
+   var promise = $.ajax({
+     url: 'https://avni-clean-eats.herokuapp.com/api/favorites',
+     type: "POST",
+     data: {item: itemName},
+     success: function(data) {
+       console.log(data);
+       controller.set('response', data);
+     },
+     dataType: 'json'
+   });
 
-      var promise = $.ajax({
-        url: 'http://localhost:3000/api/favorites',
-        type: "POST",
-        data: {item: this.get('listItem')},
-        success: function(data) {
-          console.log(data);
-          controller.set('response', data);
-        },
-        dataType: 'json'
-      });
-
-    },
+   alert("You have added '" + itemName + "' to your grocery list!" );
+ },
 
     selectPreference(preference) {
 
@@ -24,7 +27,16 @@ export default Ember.Controller.extend({
     },
 
     search() {
+
       var pref = this.get('preference');
+
+      // if(pref == null){
+      //   pref = "lowcalorie";
+      // }
+      // else{
+      //   pref = this.get('preference');
+      // }
+
       var url = 'https://api.nutritionix.com/v1_1/search';
       var data = {};
 
