@@ -1,4 +1,4 @@
-# Finalproject
+# Clean Eats Web App
 
 See more at: http://cleaneats.surge.sh/
 
